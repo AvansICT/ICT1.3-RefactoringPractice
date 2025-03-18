@@ -1,4 +1,6 @@
-﻿namespace ICT1._3_Refactoring.RenameMethod;
+﻿using System.Text.RegularExpressions;
+
+namespace ICT1._3_Refactoring.RenameMethod;
 
 /**
 
@@ -26,26 +28,31 @@ De volgende C# code bevat een methode met een onduidelijke naam. Refactor de cod
 
 */
 
+public class Document
+{
+    private string text;
+
+    public Document(string text)
+    {
+        this.text = text;
+    }
+
+    public void DoIt()
+    {
+        Regex trimmer = new Regex(@"\s\s+", RegexOptions.Compiled);
+        var trimmedText = trimmer.Replace(text, " ");
+        string[] words = trimmedText.Split(' ');
+        int wordCount = string.IsNullOrWhiteSpace(trimmedText) ? 0 : words.Length;
+        
+        Console.WriteLine("Aantal woorden: " + wordCount);
+    }
+}
 
 public class DoIt
 {
-    public class Document {
-        private string text;
-
-        public Document(string text) {
-            this.text = text;
-        }
-
-        public void doIt() {
-            string[] words = text.Split(' ');
-            int wordCount = words.Length;
-            Console.WriteLine("Aantal woorden: " + wordCount);
-        }
-    }
-
     public void Do()
     {
         Document doc = new("The quick brown fox jumps over the lazy dog 0123456789");
-        doc.doIt();
+        doc.DoIt();
     }
 }

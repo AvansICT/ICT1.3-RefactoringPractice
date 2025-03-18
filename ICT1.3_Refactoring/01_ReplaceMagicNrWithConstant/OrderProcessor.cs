@@ -27,9 +27,6 @@ De volgende C# code bevat meerdere "magic numbers" (hardcoded waardes). Refactor
 
 */
 
-
-
-
 // Werk deze code uit
 public class OrderProcessor 
 {

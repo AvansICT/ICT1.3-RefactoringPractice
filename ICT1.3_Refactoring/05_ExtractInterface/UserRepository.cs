@@ -25,27 +25,76 @@ De volgende C# code bevat een `UserRepository` klasse die de data access logica 
 public class UserRepository
 {
     private readonly List<User> users = new List<User>();
-    private int nextId = 1;
+    private int nextId;
 
-    public User GetUserById(int id)
+    /// <summary>
+    /// Initializes a new instance of the UserRepository class. It creates a list of users with predefined IDs.
+    /// </summary>
+    public UserRepository()
+    {
+        users = new () { 
+            new User { Id = 1 }, 
+            new User { Id = 2 }, 
+            new User { Id = 3 }, 
+        };
+    }
+
+    /// <summary>
+    /// Retrieves a user from the storage based on a unique identifier.
+    /// </summary>
+    /// <param name="id">The unique identifier used to find the specific user in the storage.</param>
+    /// <returns>Returns the user object if found, otherwise returns null.</returns>
+    public User? GetUserById(int id)
     {
         // Logica om gebruiker op te halen uit database
-        return null; // Vervang dit door de daadwerkelijke implementatie
+        return users.SingleOrDefault(u => u.Id == id);
     }
 
-    public void SaveUser(User user)
+    /// <summary>
+    /// Saves a user to the storage after validating their information.
+    /// </summary>
+    /// <param name="user">An object representing the user to be saved.</param>
+    /// <returns>Returns true if the user is successfully saved, otherwise false.</returns>
+    public bool SaveUser(User user)
     {
-        // Logica om gebruiker op te slaan in database
+        user.Id = users.Select(u => u.Id).Max() + 1;
+        if (ValidateUserBeforeSave(user))
+        {
+            // Logica om gebruiker op te slaan in database
+            users.Add(user);
+            return true;
+        }
+
+        return false;
     }
 
+    /// <summary>
+    /// Deletes the user with the specified id from the storage
+    /// </summary>
+    /// <param name="id">The unique identifier used to find the specific user in the storage.</param>
     public void DeleteUser(int id)
     {
         // Logica om gebruiker te verwijderen uit database
+        User? user = users.SingleOrDefault(u => u.Id == id);
+        if (user is not null)
+        { 
+            users.Remove(user); 
+        }
     }
 
+    /// <summary>
+    /// Validates a user before saving to ensure they are not already present and have a valid ID.
+    /// </summary>
+    /// <param name="user">Checks if the user is already in the system and if their ID is set correctly.</param>
+    /// <returns>Returns true if the user is valid for saving, otherwise false.</returns>
     private bool ValidateUserBeforeSave(User user)
     {
         // Logica om gebruiker te valideren voordat deze wordt opgeslagen
+        if (users.Contains(user) && user.Id == default || user.Id != default)
+        {
+            return false;
+        }
+
         return true;
     }
 }

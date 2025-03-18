@@ -1,4 +1,6 @@
 ﻿
+using System.Text.RegularExpressions;
+
 namespace ICT1._3_Refactoring.ReplaceDataValueWithObject;
 
 /**
@@ -28,18 +30,25 @@ De volgende C# code gebruikt een string-veld om het telefoonnummer van een klant
 
 public class Customer
 {
-    public string Name { get; set; }
-    public string PhoneNumber { get; set; }
+    public required string Name { get; set; }
+    public required string PhoneNumber { get; set; }
 
     public bool IsValidPhoneNumber()
     {
-        // Complexe validatielogica voor telefoonnummer 
-        return true; // Vervang dit door de daadwerkelijke validatielogica
+        // Accepteert nummers met +31, 06, 0031 etc.
+        // TODO: misschien vervangen door library LibPhoneNumber-csharp?
+        string pattern = @"^(?:(?:\+|00)31|0)\s*[1-9](?:\d{8}|\d{2}\s*\d{6}|\d{3}\s*\d{5})$";
+
+        return Regex.IsMatch(PhoneNumber, pattern, RegexOptions.Compiled);
     }
 
     public string GetFormattedPhoneNumber()
     {
         // Logica om telefoonnummer te formatteren
+        
+        // TODO: PhoneNumber is nu een string, erg lastig om fatsoenlijk te formatteren.
+        //          Maak PhoneNumber een eigen klasse met b.v.
+        //          CountryCode, AreaCode, SubscriberNumber properties
         return PhoneNumber; // Vervang dit door de daadwerkelijke formatteerlogica
     }
 }
