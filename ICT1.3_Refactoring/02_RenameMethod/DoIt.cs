@@ -21,11 +21,6 @@ De volgende C# code bevat een methode met een onduidelijke naam. Refactor de cod
 * Gebruik een werkwoord in de methodenaam om de actie die de methode uitvoert te beschrijven.
 * Volg de C# naming conventions (PascalCase voor methoden).
 * Zorg ervoor dat de nieuwe naam consistent is met de rest van de code.
-
-**Code:**
-
-
-
 */
 
 public class Document

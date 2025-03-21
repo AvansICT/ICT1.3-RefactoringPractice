@@ -22,25 +22,22 @@ De volgende C# code bevat een lange methode die meerdere taken uitvoert. Refacto
 * De nieuwe methode moet alle parameters ontvangen die hij nodig heeft om de taak uit te voeren.
 * De nieuwe methode moet een return waarde hebben als hij een waarde berekent die nodig is in de aanroepende methode.
 * Zorg ervoor dat de nieuwe methode goed geëncapsuleerd is en geen onnodige afhankelijkheden heeft van de `UserAuthenticator` klasse.
-
-**Code:**
-
 */
 
 public abstract class UserAuthenticator
 {
-    List<string> users = new List<string> { "alice", "bob", "charlie" };
+    readonly List<string> users = new List<string> { "alice", "bob", "charlie" };
 
     // Concrete class implements this, ignore for this exercise
     public abstract string ExecuteQuery(string qry);
 
-    public bool AuthenticateUser(string username, string password)
+    public virtual bool AuthenticateUser(string username, string password)
     {
         // 1. Check if the username exists in the database.
         bool userExists;
         if (users == null || users.Count() == 0)
             userExists = false;
-        if (users.Any(u => u == username))
+        if (users!.Any(u => u == username))
         {
             userExists = true;
         }

@@ -21,10 +21,6 @@ De volgende C# code bevat meerdere "magic numbers" (hardcoded waardes). Refactor
 * Plaats de constanten op een logische plaats in de klasse.
   * Dicht bij gebruik of juist ergens bovenaan in het bestand? Of een aparte unit?
 
-
-**Code:**
-
-
 */
 
 // Werk deze code uit

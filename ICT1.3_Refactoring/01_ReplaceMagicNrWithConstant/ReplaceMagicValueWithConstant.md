@@ -17,6 +17,3 @@ De volgende C# code bevat meerdere "magic numbers" (hardcoded waardes). Refactor
 * Gebruik PascalCase voor de namen van constante variabelen.
 * Plaats de constanten op een logische plaats in de klasse.
   * Dicht bij gebruik of juist ergens bovenaan in het bestand? Of een aparte unit?
-
-
-**Code:**

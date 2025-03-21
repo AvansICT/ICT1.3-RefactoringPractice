@@ -15,5 +15,3 @@ De volgende C# code bevat een `UserRepository` klasse die de data access logica 
 
 * De interface moet alleen de publieke methoden van de `UserRepository` klasse bevatten die deel uitmaken van het contract dat je wilt definiëren.
 * De interface moet een beschrijvende naam hebben die de functionaliteit die hij vertegenwoordigt duidelijk weergeeft.
-
-**Code:**
